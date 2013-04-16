@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">XChess</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_section2">Friends</string>
+    <string name="title_section1">Games</string>
+    <string name="login">Login</string>
+    <string name="user_data">com.jksmilton.xchess.USER_DATA</string>
+    <string name="key">xauthkey</string>
+    <string name="key_default">__not_found__</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_section3">Section 3</string>
+    <string name="no_internet">No network found.</string>
+    <string name="login_key">http://www.xchess.co.uk/application/_API/getUser/</string>
+    <string name="appID">t%25n08foxWLBRempWkv!O</string>
+    <string name="userjson">com.jksmilton.xchess.user_json</string>
+    <string name="login_no_key">http://www.xchess.co.uk/application/_API/getRequestToken/</string>
+    <string name="title_activity_login_callback">Logging in ...</string>
+	<string name="jksmilton.newgame">New Game</string>
+	<string name="jksmilton.newFriend">Add Friend</string>
+</resources>
