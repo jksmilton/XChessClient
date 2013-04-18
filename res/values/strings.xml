@@ -19,4 +19,6 @@
     <string name="title_activity_login_callback">Logging in ...</string>
 	<string name="jksmilton.newgame">New Game</string>
 	<string name="jksmilton.newFriend">Add Friend</string>
+	<string name="jksmilton.pendingFriends">http://www.xchess.co.uk/application/_API/requestPendingFriends/</string>
+	<string name="jksmilton.pendingGames">http://www.xchess.co.uk/application/_API/requestPendingGames/</string>
 </resources>

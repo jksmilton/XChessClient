@@ -24,11 +24,13 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f080006;
+        public static final int action_settings=0x7f080008;
         public static final int btnLogin=0x7f080000;
-        public static final int expandableListViewFriends=0x7f080004;
-        public static final int expandableListViewGames=0x7f080005;
-        public static final int newItem=0x7f080003;
+        public static final int child_name=0x7f080003;
+        public static final int expandableListViewFriends=0x7f080005;
+        public static final int expandableListViewGames=0x7f080006;
+        public static final int group_name=0x7f080007;
+        public static final int newItem=0x7f080004;
         public static final int progressBar1=0x7f080001;
         public static final int viewpager=0x7f080002;
     }
@@ -36,8 +38,10 @@ public final class R {
         public static final int activity_login=0x7f030000;
         public static final int activity_login_callback=0x7f030001;
         public static final int activity_main=0x7f030002;
-        public static final int fragment_main_friends=0x7f030003;
-        public static final int fragment_main_games=0x7f030004;
+        public static final int child_element=0x7f030003;
+        public static final int fragment_main_friends=0x7f030004;
+        public static final int fragment_main_games=0x7f030005;
+        public static final int parent_element=0x7f030006;
     }
     public static final class menu {
         public static final int login=0x7f070000;
@@ -50,6 +54,8 @@ public final class R {
         public static final int app_name=0x7f050000;
         public static final int jksmilton_newFriend=0x7f050011;
         public static final int jksmilton_newgame=0x7f050010;
+        public static final int jksmilton_pendingFriends=0x7f050012;
+        public static final int jksmilton_pendingGames=0x7f050013;
         public static final int key=0x7f050006;
         public static final int key_default=0x7f050007;
         public static final int login=0x7f050004;

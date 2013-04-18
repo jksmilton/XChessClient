@@ -32,4 +32,10 @@ public class Game {
 	
 	public Game(){}
 	
+	public String toString(){
+		
+		return white + " VS " + black;
+		
+	}
+	
 }
