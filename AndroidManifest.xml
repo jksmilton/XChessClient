@@ -7,6 +7,7 @@
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="17" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -36,10 +37,30 @@
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE"></category>
-                <data android:scheme="xchess"/>
+                <category android:name="android.intent.category.BROWSABLE" >
+                </category>
+
+                <data android:scheme="xchess" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.jksmilton.xchessclient.activities.AddFriendActivity"
+            android:label="@string/title_activity_add_friend"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.jksmilton.xchessclient.activities.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.jksmilton.xchessclient.activities.CreateGameActivity"
+            android:label="@string/title_activity_create_game"
+            android:parentActivityName="com.jksmilton.xchessclient.activities.MainActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.jksmilton.xchessclient.activities.MainActivity" />
         </activity>
     </application>
 

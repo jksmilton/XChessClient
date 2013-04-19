@@ -1,4 +1,4 @@
-package com.jksmilton.xchessclient.activities;
+package com.jksmilton.xchessclient.model;
 
 import java.util.ArrayList;
 import java.util.List;

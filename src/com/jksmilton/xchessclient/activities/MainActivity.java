@@ -1,14 +1,5 @@
 package com.jksmilton.xchessclient.activities;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -20,10 +11,8 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources.NotFoundException;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -32,6 +21,9 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
@@ -39,8 +31,12 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.jksmilton.xchessclient.R;
+import com.jksmilton.xchessclient.listhandlers.FriendHandler;
+import com.jksmilton.xchessclient.listhandlers.GameHandler;
 import com.jksmilton.xchessclient.model.ChessUser;
 import com.jksmilton.xchessclient.model.Game;
+import com.jksmilton.xchessclient.model.URLAccessor;
+import com.jksmilton.xchessclient.model.XpandableListAdapter;
 
 public class MainActivity extends FragmentActivity implements
 		ActionBar.TabListener {
@@ -53,13 +49,15 @@ public class MainActivity extends FragmentActivity implements
 	 * intensive, it may be best to switch to a
 	 * {@link android.support.v4.app.FragmentStatePagerAdapter}.
 	 */
-	SectionsPagerAdapter mSectionsPagerAdapter;
+	private SectionsPagerAdapter mSectionsPagerAdapter;
 	
 	/**
 	 * The {@link ViewPager} that will host the section contents.
 	 */
 	private ViewPager mViewPager;
 
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -69,18 +67,15 @@ public class MainActivity extends FragmentActivity implements
 		// Set up the action bar.
 		final ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
-		Intent intent = getIntent();
 		
-		String userStr =  intent.getStringExtra(getResources().getString(R.string.userjson));
+		SharedPreferences sharedPref = this.getSharedPreferences(getString(R.string.user_data), Context.MODE_PRIVATE);
+		
+		String userStr =  sharedPref.getString(getResources().getString(R.string.userjson), "");
 		
 		Gson gson = new Gson();
 		
 		ChessUser user = gson.fromJson(userStr, ChessUser.class);
 				
-		SharedPreferences sharedPref = this.getSharedPreferences(getString(R.string.user_data), Context.MODE_PRIVATE);
-		
-		
 		if(user.getXauth().equals("xxx")) {
 			
 			String key = sharedPref.getString(getString(R.string.key), "");
@@ -158,6 +153,44 @@ public class MainActivity extends FragmentActivity implements
 	public void onTabReselected(ActionBar.Tab tab,
 			FragmentTransaction fragmentTransaction) {
 	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu){
+		
+		MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.main, menu);
+		
+		return true;
+		
+	}
+	
+	
+	public void createNewFriend(View v) {
+
+		Intent addFriend = new Intent(this, AddFriendActivity.class);
+		
+		startActivity(addFriend);
+		
+	}
+	
+	public void createNewGame(View v) {
+		
+		Intent newGame = new Intent(this, CreateGameActivity.class);
+		startActivity(newGame);
+		
+	}
+	
+	public boolean onOptionsItemSelected(MenuItem item){
+		
+		switch(item.getItemId()){
+		
+		case R.id.action_refresh:
+			mSectionsPagerAdapter.updateFragments();
+		
+		}
+		
+		return true;		
+	}
 
 	/**
 	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -178,6 +211,8 @@ public class MainActivity extends FragmentActivity implements
 
 		public void updateFragments(){
 			
+			Log.d("Update Data", "Getting user data");
+			
 			ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 	        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 	        
@@ -189,7 +224,7 @@ public class MainActivity extends FragmentActivity implements
 	        	
 	        } else {
 	        	String url = getResources().getString(R.string.login_key) + uKey + "/" + getResources().getString(R.string.appID);
-	            URLAccessor accessor = new URLAccessor();
+	            Updater accessor = new Updater();
 	            
 	            accessor.execute(url);
 	            
@@ -223,84 +258,15 @@ public class MainActivity extends FragmentActivity implements
 			return null;
 		}
 		
-		protected class URLAccessor extends AsyncTask<String, Object, String> {
+		protected class Updater extends URLAccessor {
 			
-			
-			public String readIt(InputStream stream) throws IOException, UnsupportedEncodingException {
-			    Reader reader = null;
-			    reader = new InputStreamReader(stream, "UTF-8");        
-			    boolean ready = true;
-			    String output = "";
-			    while(ready){
-			    	
-			    	int read = reader.read();
-			    	
-			    	if(read < 0)
-			    		ready = false;
-			    	else
-			    		output+= (char) read;
-			    	
-			    }
-			    
-			    return output;
-			}
-
-
 			@Override
-			protected String doInBackground(String... params) {
-				InputStream is = null;
-				String returnStr = "Fail";
-				
-				try {
-			        URL url = new URL(params[0]);
-			        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			        conn.setReadTimeout(10000 /* milliseconds */);
-			        conn.setConnectTimeout(15000 /* milliseconds */);
-			        conn.setRequestMethod("GET");
-			        conn.setDoInput(true);
-			        // Starts the query
-			        conn.connect();
-			        int response = conn.getResponseCode();
-			        Log.d("Login without key", "The response is: " + response);
-			        is = conn.getInputStream();
-
-			        // Convert the InputStream into a string
-			        returnStr = readIt(is);
-			        
-			       
-			        
-			    // Makes sure that the InputStream is closed after the app is
-			    // finished using it.
-			    } catch (MalformedURLException e) {
-					// TODO Auto-generated catch block
-					returnStr = "malformed URL";
-				} catch (NotFoundException e) {
-					// TODO Auto-generated catch block
-					returnStr = "not found";
-				} catch (ProtocolException e) {
-					// TODO Auto-generated catch block
-					returnStr = "protocol exception";
-				} catch (IOException e) {
-					returnStr = "IO Exception: " + e.getMessage();
-				} finally {
-			        if (is != null) {
-			            try {
-							is.close();
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-			        } 
-			    }
-				return returnStr;
-			}
-		
-			@Override
-	        protected void onPostExecute(String result) {
+	        protected void onPostExecute(Object result) {
 	            
 				Gson gson = new Gson();
 				
-				ChessUser user = gson.fromJson(result, ChessUser.class);
+				ChessUser user = gson.fromJson((String) result, ChessUser.class);
+				user.setXauth(uKey);
 				
 				for(SectionFragment f : fragments){
 					
@@ -308,6 +274,12 @@ public class MainActivity extends FragmentActivity implements
 					f.update();
 					
 				}
+				
+				SharedPreferences sharedPref = activity.getSharedPreferences(activity.getResources().getString(R.string.user_data), MODE_PRIVATE);
+				SharedPreferences.Editor editor = sharedPref.edit();
+				
+				editor.putString(getResources().getString(R.string.userjson), gson.toJson(user));
+				editor.commit();
 				
 	       }
 		
@@ -340,84 +312,13 @@ public class MainActivity extends FragmentActivity implements
 	
 		protected abstract void handleResult(String result);
 		
-		public abstract void createNew(View v);
 		
-		protected class URLAccessor extends AsyncTask<Object, Object, String> {
+		protected class DataUpdater extends com.jksmilton.xchessclient.model.URLAccessor {
 			
-			
-			public String readIt(InputStream stream) throws IOException, UnsupportedEncodingException {
-			    Reader reader = null;
-			    reader = new InputStreamReader(stream, "UTF-8");        
-			    boolean ready = true;
-			    String output = "";
-			    while(ready){
-			    	
-			    	int read = reader.read();
-			    	
-			    	if(read < 0)
-			    		ready = false;
-			    	else
-			    		output+= (char) read;
-			    	
-			    }
-			    
-			    return output;
-			}
-
-
 			@Override
-			protected String doInBackground(Object... params) {
-				InputStream is = null;
-				String returnStr = "Fail";
-				
-				try {
-			        URL url = new URL((String) params[0]);
-			        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			        conn.setReadTimeout(10000 /* milliseconds */);
-			        conn.setConnectTimeout(15000 /* milliseconds */);
-			        conn.setRequestMethod("GET");
-			        conn.setDoInput(true);
-			        // Starts the query
-			        conn.connect();
-			        int response = conn.getResponseCode();
-			        Log.d("Login without key", "The response is: " + response);
-			        is = conn.getInputStream();
-
-			        // Convert the InputStream into a string
-			        returnStr = readIt(is);
-			        
-			       
-			        
-			    // Makes sure that the InputStream is closed after the app is
-			    // finished using it.
-			    } catch (MalformedURLException e) {
-					// TODO Auto-generated catch block
-					returnStr = "malformed URL";
-				} catch (NotFoundException e) {
-					// TODO Auto-generated catch block
-					returnStr = "not found";
-				} catch (ProtocolException e) {
-					// TODO Auto-generated catch block
-					returnStr = "protocol exception";
-				} catch (IOException e) {
-					returnStr = "IO Exception: " + e.getMessage();
-				} finally {
-			        if (is != null) {
-			            try {
-							is.close();
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-			        } 
-			    }
-				return returnStr;
-			}
-		
-			@Override
-	        protected void onPostExecute(String result) {
+	        protected void onPostExecute(Object result) {
 	            
-				handleResult(result);
+				handleResult((String) result);
 				
 	       }
 		
@@ -458,7 +359,7 @@ public class MainActivity extends FragmentActivity implements
 			children.add(pendingO);
 			
 			List<Object> friends = new ArrayList<Object>();
-			friends.addAll(user.getGames());
+			friends.addAll(user.getFriends());
 			children.add(friends);
 			
 			return children;
@@ -480,21 +381,17 @@ public class MainActivity extends FragmentActivity implements
 					createGroup(pendingRequests.size()),
 					createChildList(pendingRequests)
 					);
-					
+			listView.setOnChildClickListener(new FriendHandler((FragmentActivity) getActivity(), user.getXauth()));
 			listView.setAdapter(expListAdapter);
 			
 		}
 		
-		@Override
-		public void createNew(View v) {
-
-			
-			
-		}
+		
+		
 		@Override
 		protected void update() {
 
-			URLAccessor accessor = new URLAccessor();
+			DataUpdater accessor = new DataUpdater();
 			String url = getResources().getString(R.string.jksmilton_pendingFriends) + user.getXauth() + "/" + getResources().getString(R.string.appID);
 			accessor.execute(url);
 			
@@ -535,6 +432,7 @@ public class MainActivity extends FragmentActivity implements
 					createChildList(pendingRequests)
 					);
 					
+			listView.setOnChildClickListener(new GameHandler((FragmentActivity) parentActivity, user));
 			listView.setAdapter(expListAdapter);
 			
 		}
@@ -566,18 +464,9 @@ public class MainActivity extends FragmentActivity implements
 
 
 		@Override
-		public void createNew(View v) {
-
-			
-			
-		}
-
-
-
-		@Override
 		protected void update() {
 
-			URLAccessor accessor = new URLAccessor();
+			DataUpdater accessor = new DataUpdater();
 			String url = getResources().getString(R.string.jksmilton_pendingGames) + user.getXauth() + "/" + getResources().getString(R.string.appID);
 			accessor.execute(url);
 			

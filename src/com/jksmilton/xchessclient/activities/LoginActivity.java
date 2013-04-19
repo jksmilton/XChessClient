@@ -2,9 +2,6 @@ package com.jksmilton.xchessclient.activities;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
@@ -18,13 +15,13 @@ import android.content.res.Resources.NotFoundException;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.jksmilton.xchessclient.R;
+import com.jksmilton.xchessclient.model.URLAccessor;
 
 public class LoginActivity extends Activity {
 
@@ -71,31 +68,11 @@ public class LoginActivity extends Activity {
 
 	
 	
-	private class CallLoginURLs extends AsyncTask {
+	private class CallLoginURLs extends URLAccessor {
 	
 		private boolean withKey;
 		private Activity parentActivity;
 		
-		public String readIt(InputStream stream) throws IOException, UnsupportedEncodingException {
-		    Reader reader = null;
-		    reader = new InputStreamReader(stream, "UTF-8");        
-		    boolean ready = true;
-		    String output = "";
-		    while(ready){
-		    	
-		    	int read = reader.read();
-		    	
-		    	if(read < 0)
-		    		ready = false;
-		    	else
-		    		output+= (char) read;
-		    	
-		    }
-		    
-		    return output;
-		}
-
-
 		@Override
 		protected Object doInBackground(Object... params) {
 			InputStream is = null;
@@ -104,6 +81,7 @@ public class LoginActivity extends Activity {
 			parentActivity = (Activity) params[2];
 			try {
 		        URL url = new URL((String) params[0]);
+		        Log.d("Connecting to : ", (String) params[0]);
 		        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		        conn.setReadTimeout(10000 /* milliseconds */);
 		        conn.setConnectTimeout(15000 /* milliseconds */);
@@ -149,17 +127,21 @@ public class LoginActivity extends Activity {
 		@Override
         protected void onPostExecute(Object result) {
             
-			if(!((String) result).startsWith("http")){
+			if(withKey){
 				
 				Log.d("Login json", (String) result);
 				
+				SharedPreferences sharedPref = parentActivity.getSharedPreferences(parentActivity.getResources().getString(R.string.user_data), MODE_PRIVATE);
+				SharedPreferences.Editor editor = sharedPref.edit();
+				
+				editor.putString(parentActivity.getResources().getString(R.string.userjson), (String) result);
+				editor.commit();
+				
 				Intent startmain = new Intent(parentActivity, MainActivity.class);
-		        
-		        startmain.putExtra(getResources().getString(R.string.userjson), (String) result);
-		        
+		        		        
 		        parentActivity.startActivity(startmain);
 				
-			} else {
+			} else if(result.toString().startsWith("http")) {
 				
 				Uri loginUrl = Uri.parse((String) result);
 		        
@@ -167,6 +149,10 @@ public class LoginActivity extends Activity {
 		   
 		        parentActivity.startActivity(webIntent);
 		        
+				
+			} else {
+				
+				Toast.makeText(parentActivity, result.toString(), Toast.LENGTH_SHORT).show();
 				
 			}
 			
