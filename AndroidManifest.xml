@@ -62,6 +62,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.jksmilton.xchessclient.activities.MainActivity" />
         </activity>
+        <activity
+            android:name="com.jksmilton.xchessclient.activities.ChessActivity"
+            android:label="@string/title_activity_chess"
+            android:parentActivityName="com.jksmilton.xchessclient.activities.MainActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.jksmilton.xchessclient.activities.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

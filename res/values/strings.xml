@@ -15,7 +15,7 @@
     <string name="appID">t%25n08foxWLBRempWkv!O</string>
     <string name="userjson">com.jksmilton.xchess.user_json</string>
     <string name="login_no_key">http://www.xchess.co.uk/application/_API/getRequestToken/</string>
-    <string name="title_activity_login_callback">Logging in ...</string>
+    <string name="title_activity_login_callback">Logging in</string>
     <string name="jksmilton.newgame">New Game</string>
     <string name="jksmilton.newFriend">Add Friend</string>
     <string name="jksmilton.pendingFriends">http://www.xchess.co.uk/application/_API/requestPendingFriends/</string>
@@ -31,9 +31,11 @@
     <string name="jksmilton.requestGameFriend">http://www.xchess.co.uk/application/_API/requestGame/</string>
     <string name="jksmilton.acceptGameReq">http://www.xchess.co.uk/application/_API/acceptPendingGame/</string>
     <string name="title_activity_create_game">CreateGameActivity</string>
-	<string name="jksmilton.randomGameBttn">Random Game</string>
-	<string name="jksmilton.newGameWithFriend">Against A Friend</string>
-	<string name="jksmilton.pick_friend">Pick Friend</string>
-	<string name="jksmilton.requestRandomgGame">http://www.xchess.co.uk/application/_API/requestRandomGame/</string>
-	
+    <string name="jksmilton.randomGameBttn">Random Game</string>
+    <string name="jksmilton.newGameWithFriend">Against A Friend</string>
+    <string name="jksmilton.pick_friend">Pick Friend</string>
+    <string name="jksmilton.requestRandomgGame">http://www.xchess.co.uk/application/_API/requestRandomGame/</string>
+    <string name="title_activity_chess">ChessActivity</string>
+    <string name="piece_tile_desc">Piece on tile if any</string>
+
 </resources>

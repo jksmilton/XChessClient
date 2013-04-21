@@ -3,6 +3,7 @@ package com.jksmilton.xchessclient.listhandlers;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
@@ -10,10 +11,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.Toast;
 import android.widget.ExpandableListView.OnChildClickListener;
+import android.widget.Toast;
 
 import com.jksmilton.xchessclient.R;
+import com.jksmilton.xchessclient.activities.ChessActivity;
 import com.jksmilton.xchessclient.model.ChessUser;
 import com.jksmilton.xchessclient.model.Game;
 import com.jksmilton.xchessclient.model.PostURLAccessor;
@@ -51,6 +53,9 @@ public class GameHandler implements OnChildClickListener{
 		
 		if(groupType.equals("Games")){
 			pending = false;
+			
+			Intent i = new Intent(parent, ChessActivity.class);
+			parent.startActivity(i);
 			
 		} else {
 			pending=true;

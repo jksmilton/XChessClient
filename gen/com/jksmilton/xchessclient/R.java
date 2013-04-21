@@ -21,40 +21,63 @@ public final class R {
         public static final int activity_vertical_margin=0x7f040001;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
-        public static final int ic_refresh=0x7f020001;
+        public static final int black_bishop=0x7f020000;
+        public static final int black_king=0x7f020001;
+        public static final int black_knight=0x7f020002;
+        public static final int black_pawn=0x7f020003;
+        public static final int black_queen=0x7f020004;
+        public static final int black_rook=0x7f020005;
+        public static final int black_square=0x7f020006;
+        public static final int ic_launcher=0x7f020007;
+        public static final int ic_refresh=0x7f020008;
+        public static final int selected_square=0x7f020009;
+        public static final int white_bishop=0x7f02000a;
+        public static final int white_king=0x7f02000b;
+        public static final int white_knight=0x7f02000c;
+        public static final int white_pawn=0x7f02000d;
+        public static final int white_queen=0x7f02000e;
+        public static final int white_rook=0x7f02000f;
+        public static final int white_square=0x7f020010;
     }
     public static final class id {
-        public static final int action_refresh=0x7f08000d;
-        public static final int action_settings=0x7f08000c;
+        public static final int action_refresh=0x7f080012;
+        public static final int action_settings=0x7f080011;
         public static final int addButton=0x7f080000;
-        public static final int btnLogin=0x7f080004;
-        public static final int child_name=0x7f080007;
-        public static final int expandableListViewFriends=0x7f080009;
-        public static final int expandableListViewGames=0x7f08000a;
+        public static final int btnLogin=0x7f080006;
+        public static final int chess_tile=0x7f08000e;
+        public static final int chessboard=0x7f080002;
+        public static final int child_name=0x7f080009;
+        public static final int expandableListViewFriends=0x7f08000b;
+        public static final int expandableListViewGames=0x7f08000c;
         public static final int friendHandle=0x7f080001;
-        public static final int gameWithFriendButton=0x7f080002;
-        public static final int group_name=0x7f08000b;
-        public static final int newItem=0x7f080008;
-        public static final int progressBar1=0x7f080005;
-        public static final int randomGame=0x7f080003;
-        public static final int viewpager=0x7f080006;
+        public static final int gameWithFriendButton=0x7f080004;
+        public static final int group_name=0x7f08000d;
+        public static final int newItem=0x7f08000a;
+        public static final int piece=0x7f080010;
+        public static final int progressBar1=0x7f080007;
+        public static final int randomGame=0x7f080005;
+        public static final int square=0x7f08000f;
+        public static final int transcript=0x7f080003;
+        public static final int viewpager=0x7f080008;
     }
     public static final class layout {
         public static final int activity_add_friend=0x7f030000;
-        public static final int activity_create_game=0x7f030001;
-        public static final int activity_login=0x7f030002;
-        public static final int activity_login_callback=0x7f030003;
-        public static final int activity_main=0x7f030004;
-        public static final int child_element=0x7f030005;
-        public static final int fragment_main_friends=0x7f030006;
-        public static final int fragment_main_games=0x7f030007;
-        public static final int parent_element=0x7f030008;
+        public static final int activity_chess=0x7f030001;
+        public static final int activity_create_game=0x7f030002;
+        public static final int activity_login=0x7f030003;
+        public static final int activity_login_callback=0x7f030004;
+        public static final int activity_main=0x7f030005;
+        public static final int child_element=0x7f030006;
+        public static final int fragment_main_friends=0x7f030007;
+        public static final int fragment_main_games=0x7f030008;
+        public static final int parent_element=0x7f030009;
+        public static final int tile=0x7f03000a;
     }
     public static final class menu {
         public static final int add_friend=0x7f070000;
-        public static final int create_game=0x7f070001;
-        public static final int main=0x7f070002;
+        public static final int chess=0x7f070001;
+        public static final int create_game=0x7f070002;
+        public static final int main=0x7f070003;
     }
     public static final class string {
         public static final int action_refresh=0x7f050001;
@@ -83,7 +106,9 @@ public final class R {
         public static final int login_key=0x7f05000a;
         public static final int login_no_key=0x7f05000d;
         public static final int no_internet=0x7f050009;
+        public static final int piece_tile_desc=0x7f050023;
         public static final int title_activity_add_friend=0x7f050014;
+        public static final int title_activity_chess=0x7f050022;
         public static final int title_activity_create_game=0x7f05001d;
         public static final int title_activity_login_callback=0x7f05000e;
         public static final int title_activity_main=0x7f050008;
