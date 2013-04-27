@@ -8,10 +8,11 @@
  * 27.07.00 Creation
  *****************************************************************************/
 
-package javachess;
-import javachess.jcBoard;
-import javachess.jcMove;
+package com.jksmilton.xchessclient.javachess;
 import java.util.*;
+
+import com.jksmilton.xchessclient.javachess.jcBoard;
+import com.jksmilton.xchessclient.javachess.jcMove;
 
 public class jcMoveListGenerator
 {

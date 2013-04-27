@@ -127,7 +127,7 @@ public class LoginActivity extends Activity {
 		@Override
         protected void onPostExecute(Object result) {
             
-			if(withKey){
+			if(withKey && ((String) result).startsWith("{")){
 				
 				Log.d("Login json", (String) result);
 				

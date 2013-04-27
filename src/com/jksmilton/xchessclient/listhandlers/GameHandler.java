@@ -55,6 +55,11 @@ public class GameHandler implements OnChildClickListener{
 			pending = false;
 			
 			Intent i = new Intent(parent, ChessActivity.class);
+			
+			i.putExtra(ChessActivity.GAME_EXTRA_KEY, game.getId());
+		
+			i.putExtra(ChessActivity.GAME_PLAYER_COLOUR, player.getHandle().equals(game.getWhite()));
+			
 			parent.startActivity(i);
 			
 		} else {

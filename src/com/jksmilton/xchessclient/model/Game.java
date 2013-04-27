@@ -29,12 +29,27 @@ public class Game {
 
 	private String white;
 	private String black;
-	
+	private int turn;
+	public int getTurn() {
+		return turn;
+	}
+
+	public void setTurn(int turn) {
+		this.turn = turn;
+	}
+
 	public Game(){}
 	
 	public String toString(){
 		
-		return white + " VS " + black;
+		String vs;
+		
+		if(turn==1)
+			vs = " VS (turn) ";
+		else
+			vs = " (turn) VS ";
+		
+		return white + vs + black;
 		
 	}
 	

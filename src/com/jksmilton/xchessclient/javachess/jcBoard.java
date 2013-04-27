@@ -13,7 +13,7 @@
  *          probably because it includes memory addresses in the calculation.
  ***************************************************************************/
 
-package javachess;
+package com.jksmilton.xchessclient.javachess;
 import java.util.Random;
 import java.io.*;
 

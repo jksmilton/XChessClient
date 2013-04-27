@@ -418,23 +418,23 @@ public class MainActivity extends FragmentActivity implements
 
 		@Override
 		protected void handleResult(String result) {
-			
-			View rootView = this.getView();
-			Gson gson = new Gson();
-			
-			List<Game> pendingRequests = Arrays.asList(gson.fromJson(result, Game[].class));
-			
-			ExpandableListView listView = (ExpandableListView) rootView.findViewById(R.id.expandableListViewGames);
-			
-			XpandableListAdapter expListAdapter = new XpandableListAdapter(
-					getActivity(),
-					createGroup(pendingRequests.size()),
-					createChildList(pendingRequests)
-					);
-					
-			listView.setOnChildClickListener(new GameHandler((FragmentActivity) parentActivity, user));
-			listView.setAdapter(expListAdapter);
-			
+			if(result.startsWith("[")){
+				View rootView = this.getView();
+				Gson gson = new Gson();
+				
+				List<Game> pendingRequests = Arrays.asList(gson.fromJson(result, Game[].class));
+				
+				ExpandableListView listView = (ExpandableListView) rootView.findViewById(R.id.expandableListViewGames);
+				
+				XpandableListAdapter expListAdapter = new XpandableListAdapter(
+						getActivity(),
+						createGroup(pendingRequests.size()),
+						createChildList(pendingRequests)
+						);
+						
+				listView.setOnChildClickListener(new GameHandler((FragmentActivity) parentActivity, user));
+				listView.setAdapter(expListAdapter);
+			}
 		}
 		
 		private List<String> createGroup(int numPending){

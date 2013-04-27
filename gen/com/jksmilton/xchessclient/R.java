@@ -8,6 +8,9 @@
 package com.jksmilton.xchessclient;
 
 public final class R {
+    public static final class array {
+        public static final int promotion_choice=0x7f070000;
+    }
     public static final class attr {
     }
     public static final class dimen {
@@ -40,25 +43,26 @@ public final class R {
         public static final int white_square=0x7f020010;
     }
     public static final class id {
-        public static final int action_refresh=0x7f080012;
-        public static final int action_settings=0x7f080011;
-        public static final int addButton=0x7f080000;
-        public static final int btnLogin=0x7f080006;
-        public static final int chess_tile=0x7f08000e;
-        public static final int chessboard=0x7f080002;
-        public static final int child_name=0x7f080009;
-        public static final int expandableListViewFriends=0x7f08000b;
-        public static final int expandableListViewGames=0x7f08000c;
-        public static final int friendHandle=0x7f080001;
-        public static final int gameWithFriendButton=0x7f080004;
-        public static final int group_name=0x7f08000d;
-        public static final int newItem=0x7f08000a;
-        public static final int piece=0x7f080010;
-        public static final int progressBar1=0x7f080007;
-        public static final int randomGame=0x7f080005;
-        public static final int square=0x7f08000f;
-        public static final int transcript=0x7f080003;
-        public static final int viewpager=0x7f080008;
+        public static final int action_refresh=0x7f090012;
+        public static final int action_resign=0x7f090013;
+        public static final int action_settings=0x7f090011;
+        public static final int addButton=0x7f090000;
+        public static final int btnLogin=0x7f090006;
+        public static final int chess_tile=0x7f09000e;
+        public static final int chessboard=0x7f090002;
+        public static final int child_name=0x7f090009;
+        public static final int expandableListViewFriends=0x7f09000b;
+        public static final int expandableListViewGames=0x7f09000c;
+        public static final int friendHandle=0x7f090001;
+        public static final int gameWithFriendButton=0x7f090004;
+        public static final int group_name=0x7f09000d;
+        public static final int newItem=0x7f09000a;
+        public static final int piece=0x7f090010;
+        public static final int progressBar1=0x7f090007;
+        public static final int randomGame=0x7f090005;
+        public static final int square=0x7f09000f;
+        public static final int transcript=0x7f090003;
+        public static final int viewpager=0x7f090008;
     }
     public static final class layout {
         public static final int activity_add_friend=0x7f030000;
@@ -74,10 +78,10 @@ public final class R {
         public static final int tile=0x7f03000a;
     }
     public static final class menu {
-        public static final int add_friend=0x7f070000;
-        public static final int chess=0x7f070001;
-        public static final int create_game=0x7f070002;
-        public static final int main=0x7f070003;
+        public static final int add_friend=0x7f080000;
+        public static final int chess=0x7f080001;
+        public static final int create_game=0x7f080002;
+        public static final int main=0x7f080003;
     }
     public static final class string {
         public static final int action_refresh=0x7f050001;
@@ -91,15 +95,20 @@ public final class R {
         public static final int jksmilton_addFriendurl=0x7f050013;
         public static final int jksmilton_friendAcceptURL=0x7f05001a;
         public static final int jksmilton_friendAddSuccess=0x7f050019;
+        public static final int jksmilton_game_resign=0x7f050027;
+        public static final int jksmilton_get_game_transcript=0x7f050025;
         public static final int jksmilton_newFriend=0x7f050010;
         public static final int jksmilton_newGameWithFriend=0x7f05001f;
         public static final int jksmilton_newgame=0x7f05000f;
         public static final int jksmilton_pendingFriends=0x7f050011;
         public static final int jksmilton_pendingGames=0x7f050012;
         public static final int jksmilton_pick_friend=0x7f050020;
+        public static final int jksmilton_promotion=0x7f050024;
         public static final int jksmilton_randomGameBttn=0x7f05001e;
         public static final int jksmilton_requestGameFriend=0x7f05001b;
         public static final int jksmilton_requestRandomgGame=0x7f050021;
+        public static final int jksmilton_resign_from_game=0x7f050028;
+        public static final int jksmilton_submit_move=0x7f050026;
         public static final int key=0x7f050006;
         public static final int key_default=0x7f050007;
         public static final int login=0x7f050004;

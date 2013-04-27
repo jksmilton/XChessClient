@@ -1,7 +1,6 @@
 package com.jksmilton.xchessclient.model;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,15 +12,26 @@ import com.jksmilton.xchessclient.R;
 public class TileAdapter extends BaseAdapter {
 
 	private String[] pieces;
-	private boolean isWhite;
 	private int selected = -1;
 	private LayoutInflater inflater;
 	
 
-	public TileAdapter(Context c, String[] board, boolean white){
+	public TileAdapter(Context c, String[] board){
 		inflater = LayoutInflater.from(c);
 		pieces = board;
-		isWhite = white;
+	}
+	
+	public void movePiece(int start, int end){
+		
+		pieces[end] = pieces[start];
+		pieces[start] = new String("");
+		
+	}
+	
+	public void setSelected(int select){
+		
+		selected = select;
+		
 	}
 	
 	@Override
@@ -80,13 +90,13 @@ public class TileAdapter extends BaseAdapter {
 		
 		int[] pos = TileAdapter.convertDimToCoord(position);
 		
-		Log.d("Creating view at", "x: " + pos[1] + "; y: " + pos[0]);
+		//Log.d("Creating view at", "x: " + pos[1] + "; y: " + pos[0]);
 		
 		if(selected == position){
 			
 			square.setImageResource(R.drawable.selected_square);
 			
-		} else if((isWhite && (pos[0]+pos[1]) % 2  == 1)){
+		} else if((pos[0]+pos[1]) % 2  == 1){
 			square.setImageResource(R.drawable.white_square);
 		} else{
 			square.setImageResource(R.drawable.black_square);

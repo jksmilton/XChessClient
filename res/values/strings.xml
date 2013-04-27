@@ -37,5 +37,9 @@
     <string name="jksmilton.requestRandomgGame">http://www.xchess.co.uk/application/_API/requestRandomGame/</string>
     <string name="title_activity_chess">ChessActivity</string>
     <string name="piece_tile_desc">Piece on tile if any</string>
-
+	<string name="jksmilton.promotion">Promote Pawn</string>
+	<string name="jksmilton.get_game_transcript">http://www.xchess.co.uk/application/_API/getGame/</string>
+	<string name="jksmilton.submit_move">http://www.xchess.co.uk/application/_API/addMove/</string>
+	<string name="jksmilton.game_resign">Resign</string>
+	<string name="jksmilton.resign_from_game">http://www.xchess.co.uk/application/_API/resignGame/</string>
 </resources>

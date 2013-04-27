@@ -29,7 +29,8 @@ public abstract class PostURLAccessor extends URLAccessor {
 	        // Starts the query
 	        conn.connect();
 	        int response = conn.getResponseCode();
-	        Log.d("Acessing " + params[0], "The response is: " + response);
+	        Log.d("Acessing ", (String) params[0]);
+	        Log.d("The response is: ", ""+ response);
 	        is = conn.getInputStream();
 
 	        // Convert the InputStream into a string

@@ -12,11 +12,8 @@
  * History:
  * 11.06.00 Creation
  **************************************************************************/
-package javachess;
-import javachess.jcMove;
-import javachess.jcBoard;
-import javachess.jcMoveListGenerator;
-import controllers.MoveException;
+package com.jksmilton.xchessclient.javachess;
+import com.jksmilton.xchessclient.exceptions.MoveException;
 public class jcPlayerHuman extends jcPlayer
 {
   // The keyboard
@@ -141,7 +138,8 @@ public class jcPlayerHuman extends jcPlayer
       Pseudos.ComputeLegalMoves( theBoard );
       if ( !Pseudos.Find( Mov ) )
       {
-       throw new MoveException(MoveException.illegalMoveType);
+    	  Mov.Print();
+    	  throw new MoveException(MoveException.illegalMoveType);
       }
 
       // If pseudo-legal, then verify whether it leaves the king in check

@@ -15,7 +15,7 @@
  * 14.08.00 Added "search depth" field, so that we can determine whether a
  *          transposition table entry should be used or not.
  ***************************************************************************/
-package javachess;
+package com.jksmilton.xchessclient.javachess;
 
 public class jcMove
 {
