@@ -5,7 +5,7 @@
     <string name="action_refresh">Refresh</string>
     <string name="title_section2">Friends</string>
     <string name="title_section1">Games</string>
-    <string name="login">Login</string>
+    <string name="login">Multiplayer</string>
     <string name="user_data">com.jksmilton.xchess.USER_DATA</string>
     <string name="key">xauthkey</string>
     <string name="key_default">__not_found__</string>
@@ -35,11 +35,20 @@
     <string name="jksmilton.newGameWithFriend">Against A Friend</string>
     <string name="jksmilton.pick_friend">Pick Friend</string>
     <string name="jksmilton.requestRandomgGame">http://www.xchess.co.uk/application/_API/requestRandomGame/</string>
-    <string name="title_activity_chess">ChessActivity</string>
+    <string name="title_activity_chess">XChess</string>
     <string name="piece_tile_desc">Piece on tile if any</string>
-	<string name="jksmilton.promotion">Promote Pawn</string>
-	<string name="jksmilton.get_game_transcript">http://www.xchess.co.uk/application/_API/getGame/</string>
-	<string name="jksmilton.submit_move">http://www.xchess.co.uk/application/_API/addMove/</string>
-	<string name="jksmilton.game_resign">Resign</string>
-	<string name="jksmilton.resign_from_game">http://www.xchess.co.uk/application/_API/resignGame/</string>
+    <string name="jksmilton.promotion">Promote Pawn</string>
+    <string name="jksmilton.get_game_transcript">http://www.xchess.co.uk/application/_API/getGame/</string>
+    <string name="jksmilton.submit_move">http://www.xchess.co.uk/application/_API/addMove/</string>
+    <string name="jksmilton.game_resign">Resign</string>
+    <string name="jksmilton.resign_from_game">http://www.xchess.co.uk/application/_API/resignGame/</string>
+    <string name="jksmilton.play_offline">Single Player</string>
+    <string name="jksmilton.current_game">current_player_game.xchess</string>
+    <string name="jksmilton.solo_side">com.jksmilton.xchess.SOLO_USER_SIDE</string>
+    <string name="title_activity_new_ai_game">NewAiGame</string>
+    <string name="jksmilton.player_white">White</string>
+    <string name="jksmilton.player_black">Black</string>
+    <string name="jksmilton.player_choice">Choose Side</string>
+    <string name="title_activity_ai_game">XChess</string>
+	<string name="action_newgame">New Game</string>
 </resources>

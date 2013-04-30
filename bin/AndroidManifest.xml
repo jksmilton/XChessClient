@@ -71,6 +71,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.jksmilton.xchessclient.activities.MainActivity" />
         </activity>
+        <activity
+            android:name="com.jksmilton.xchessclient.activities.NewAiGame"
+            android:label="@string/title_activity_new_ai_game" >
+        </activity>
+        <activity
+            android:name="com.jksmilton.xchessclient.activities.AiGameActivity"
+            android:label="@string/title_activity_ai_game"
+            android:screenOrientation="portrait" >
+        </activity>
     </application>
 
 </manifest>

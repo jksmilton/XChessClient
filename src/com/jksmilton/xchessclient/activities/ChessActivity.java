@@ -291,43 +291,43 @@ public class ChessActivity extends FragmentActivity {
 					
 					Log.d("Applied move from", "start: " + startPos[0] + ";" + startPos[1]);
 					Log.d("Applied move to", "end: " + endPos[0] + ";" + endPos[1]);
-					
-					if((isWhite && engBoard.GetCurrentPlayer() == 0) && move.MoveType == jcMove.MOVE_CASTLING_KINGSIDE){
+					move.Print();
+					if((isWhite && engBoard.GetCurrentPlayer() == 1) && move.MoveType == jcMove.MOVE_CASTLING_KINGSIDE){
 						
 						pieces[0][5] = pieces[0][7];
 						pieces[0][7] = "";
 						
-					} else if((isWhite && engBoard.GetCurrentPlayer() == 0) && move.MoveType == jcMove.MOVE_CASTLING_QUEENSIDE){
+					} else if((isWhite && engBoard.GetCurrentPlayer() == 1) && move.MoveType == jcMove.MOVE_CASTLING_QUEENSIDE){
 						
 						pieces[0][3] = pieces[0][0];
 						pieces[0][0] = "";
 						
-					} else if((isWhite && engBoard.GetCurrentPlayer() != 0) && move.MoveType == jcMove.MOVE_CASTLING_KINGSIDE){
+					} else if((isWhite && engBoard.GetCurrentPlayer() != 1) && move.MoveType == jcMove.MOVE_CASTLING_KINGSIDE){
 						
 						pieces[7][5] = pieces[7][7];
 						pieces[7][7] = "";
 						
-					} else if((isWhite && engBoard.GetCurrentPlayer() != 0) && move.MoveType == jcMove.MOVE_CASTLING_QUEENSIDE){
+					} else if((isWhite && engBoard.GetCurrentPlayer() != 1) && move.MoveType == jcMove.MOVE_CASTLING_QUEENSIDE){
 						
 						pieces[7][3] = pieces[7][0];
 						pieces[7][0] = "";
 						
-					} else if((!isWhite && engBoard.GetCurrentPlayer() == 0) && move.MoveType == jcMove.MOVE_CASTLING_KINGSIDE){
+					} else if((!isWhite && engBoard.GetCurrentPlayer() ==1) && move.MoveType == jcMove.MOVE_CASTLING_KINGSIDE){
 						
 						pieces[7][2] = pieces[7][0];
 						pieces[7][0] = "";
 						
-					} else if((!isWhite && engBoard.GetCurrentPlayer() == 0) && move.MoveType == jcMove.MOVE_CASTLING_QUEENSIDE){
+					} else if((!isWhite && engBoard.GetCurrentPlayer() == 1) && move.MoveType == jcMove.MOVE_CASTLING_QUEENSIDE){
 						
 						pieces[7][5] = pieces[7][0];
 						pieces[7][7] = "";
 						
-					} else if((!isWhite && engBoard.GetCurrentPlayer() != 0) && move.MoveType == jcMove.MOVE_CASTLING_KINGSIDE){
+					} else if((!isWhite && engBoard.GetCurrentPlayer() != 1) && move.MoveType == jcMove.MOVE_CASTLING_KINGSIDE){
 						
 						pieces[0][2] = pieces[0][0];
 						pieces[0][0] = "";
 						
-					} else if((!isWhite && engBoard.GetCurrentPlayer() != 0) && move.MoveType == jcMove.MOVE_CASTLING_QUEENSIDE){
+					} else if((!isWhite && engBoard.GetCurrentPlayer() != 1) && move.MoveType == jcMove.MOVE_CASTLING_QUEENSIDE){
 						
 						pieces[0][5] = pieces[0][7];
 						pieces[0][7] = "";

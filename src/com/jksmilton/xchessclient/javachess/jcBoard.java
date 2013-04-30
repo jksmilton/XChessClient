@@ -14,8 +14,12 @@
  ***************************************************************************/
 
 package com.jksmilton.xchessclient.javachess;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.StreamTokenizer;
 import java.util.Random;
-import java.io.*;
 
 /****************************************************************************
  * public class jcBoard
@@ -304,8 +308,7 @@ public class jcBoard
   {
     for( int line = 0; line < 8; line++ )
     {
-      System.out.println( "-----------------------------------------" );
-      System.out.println( "|    |    |    |    |    |    |    |    |" );
+ 
       for( int col = 0; col < 8; col++ )
       {
         long bits = SquareBits[ line * 8 + col ];
@@ -324,16 +327,12 @@ public class jcBoard
           piece = EMPTY_SQUARE;
 
         // Show the piece
-        System.out.print( "| " + PieceStrings[ piece ] + " " );
+      //  System.out.print( "| " + PieceStrings[ piece ] + " " );
       }
-      System.out.println( "|" );
-      System.out.println( "|    |    |    |    |    |    |    |    |" );
+     // System.out.println( "|" );
+     // System.out.println( "|    |    |    |    |    |    |    |    |" );
     }
-    System.out.println( "-----------------------------------------" );
-    if ( CurrentPlayer == jcPlayer.SIDE_BLACK )
-      System.out.println( "NEXT MOVE: BLACK ");
-    else
-      System.out.println( "NEXT MOVE: WHITE" );
+   
 
     return true;
   }
@@ -567,7 +566,7 @@ public class jcBoard
 
   // public boolean Load
   // Load a board from a file
-  public boolean Load( String fileName ) throws Exception
+  public boolean Load( File fileName ) throws Exception
   {
     // Clean the board first
     EmptyBoard();
@@ -629,7 +628,7 @@ public class jcBoard
 
   // public boolean Save
   // Save the state of the game to a file
-  public boolean Save( String fileName ) throws Exception
+  public boolean Save( File fileName ) throws Exception
   {
     // Open the file for business
     FileWriter fr = new FileWriter( fileName );
@@ -638,7 +637,7 @@ public class jcBoard
     // Whose turn is it?
     bw.write( jcPlayer.PlayerStrings[ CurrentPlayer ] );
     bw.newLine();
-
+    
     // Count the pieces on the board
     int numPieces = 0;
     for( int i = 0; i < ALL_SQUARES; i++ )

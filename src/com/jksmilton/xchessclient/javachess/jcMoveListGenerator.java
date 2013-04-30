@@ -33,7 +33,7 @@ public class jcMoveListGenerator
   // Construction
   public jcMoveListGenerator()
   {
-    Moves = new ArrayList( 10 );
+    Moves = new ArrayList<jcMove>( 10 );
     MovesIt = null;
     ResetIterator();
   }
@@ -52,7 +52,7 @@ public class jcMoveListGenerator
   }
 
   // Accessors
-  public ArrayList GetMoveList() { return Moves; }
+  public ArrayList<jcMove> GetMoveList() { return Moves; }
   public int Size() { return Moves.size(); }
 
   // public boolean Find( jcMove mov )

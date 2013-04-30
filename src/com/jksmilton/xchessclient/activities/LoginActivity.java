@@ -1,5 +1,6 @@
 package com.jksmilton.xchessclient.activities;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -65,7 +66,24 @@ public class LoginActivity extends Activity {
 		
 	}
 	
-
+	public void startOffline(View view){
+		
+		File file = new File(this.getFilesDir(), getResources().getString(R.string.jksmilton_current_game));
+		Intent next;
+		
+		if(file.exists()){
+			
+			next = new Intent(this, AiGameActivity.class);
+			
+		} else {
+			
+			next = new Intent(this, NewAiGame.class);
+			
+		}
+		
+		this.startActivity(next);
+		
+	}
 	
 	
 	private class CallLoginURLs extends URLAccessor {

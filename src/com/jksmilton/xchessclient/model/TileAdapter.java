@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
 import com.jksmilton.xchessclient.R;
+import com.jksmilton.xchessclient.javachess.jcMove;
 
 public class TileAdapter extends BaseAdapter {
 
@@ -31,6 +32,30 @@ public class TileAdapter extends BaseAdapter {
 	public void setSelected(int select){
 		
 		selected = select;
+		
+	}
+	
+	public void setBoard(String[] board){
+		pieces = board;
+		notifyDataSetChanged();
+	}
+	
+	public void promotePawn(int promotion, int position){
+		
+		switch(promotion){
+		case jcMove.MOVE_PROMOTION_QUEEN:{
+			pieces[position] = pieces[position].substring(0, 6) + "queen";
+				}break;
+		case jcMove.MOVE_PROMOTION_BISHOP:{
+			pieces[position] = pieces[position].substring(0, 6) + "bishop";
+				}break;
+		case jcMove.MOVE_PROMOTION_ROOK:{
+			pieces[position] = pieces[position].substring(0, 6) + "rook";
+		}break;
+		case jcMove.MOVE_PROMOTION_KNIGHT:{
+			pieces[position] = pieces[position].substring(0, 6) + "knight";
+		}break;
+		}
 		
 	}
 	

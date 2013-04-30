@@ -23,7 +23,7 @@ import com.jksmilton.xchessclient.model.PostURLAccessor;
 import com.jksmilton.xchessclient.model.TileAdapter;
 import com.jksmilton.xchessclient.model.TranscriptAdapter;
 
-public class TileClickHandler implements OnItemClickListener {
+public class TileClickHandler implements OnItemClickListener, CreatesPawnPromotion {
 
 	private int previousPosition = -1;
 	private String player;
@@ -70,11 +70,11 @@ public class TileClickHandler implements OnItemClickListener {
 		} else if(previousPosition >= 0){
 			
 			move = getMove(previousPosition, position);
-			
+			piece = (String) gridAdapter.getItem(previousPosition);
 			if(piece.endsWith("pawn") && position < 8){
 				
 				PromotePawn pawnDialog = new PromotePawn();
-				pawnDialog.set(move);
+				pawnDialog.set(move, this);
 				pawnDialog.show(activity.getSupportFragmentManager(), "Pawn Promotion Dialog");
 				
 			} else {
@@ -152,10 +152,12 @@ public class TileClickHandler implements OnItemClickListener {
 	public static class PromotePawn extends DialogFragment {
 		
 		private jcMove move;
+		private CreatesPawnPromotion toSend;
 		
-		public void set(jcMove crntMove){
+		public void set(jcMove crntMove, CreatesPawnPromotion parent){
 			
 			move = crntMove;
+			toSend = parent;
 			
 		}
 		
@@ -175,7 +177,7 @@ public class TileClickHandler implements OnItemClickListener {
 		            	   default : ;
 		            	   }
 		            	   
-		            	   
+		            	   toSend.sendMove(move);
 		           }
 		    });
 		    return builder.create();
@@ -266,17 +268,52 @@ public class TileClickHandler implements OnItemClickListener {
 			
 			if(result.equals("Success")){
 				
-				if(player.equals("white")){
+				int start, end;
+				start = move.SourceSquare;
+				end = move.DestinationSquare;
+				
+				if(!player.equals("white")){
 					
-					board.ApplyMove(move);
-					gridAdapter.movePiece(move.SourceSquare, move.DestinationSquare);
+					start = 63- start;
+					end = 63 - end;
 					
+				} 
+				
+				board.ApplyMove(move);
+				gridAdapter.movePiece(start, end);
+				
+				if(move.MoveType > jcMove.NO_PROMOTION_MASK){
+					gridAdapter.promotePawn(move.MoveType, end);
+				}
+				
+				if(move.MoveType == jcMove.MOVE_CASTLING_KINGSIDE){
+					board.ClearExtraKings(1 - board.GetCurrentPlayer());
 					
-				} else {
-					board.ApplyMove(move);
-					gridAdapter.movePiece(63 - move.SourceSquare, 63 - move.DestinationSquare);
+					if(player.equals("white")){
+						
+						gridAdapter.movePiece(63, 63 - 2);
+						
+					} else {
+						
+						gridAdapter.movePiece(63-7, 63-5);
+						
+					}
+					
+				} else if (move.MoveType == jcMove.MOVE_CASTLING_QUEENSIDE) {
+					board.ClearExtraKings(1 - board.GetCurrentPlayer());
+					
+					if(player.equals("white")){
+						
+						gridAdapter.movePiece(63 - 7, 63 - 4);
+						
+					} else {
+						
+						gridAdapter.movePiece(63, 63 - 3);
+						
+					}
 					
 				}
+				
 				gridAdapter.setSelected(-1);
 				previousPosition = -1;
 				gridAdapter.notifyDataSetChanged();
